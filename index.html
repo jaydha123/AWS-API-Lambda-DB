@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>To the Power of Math!</title>
+    <title>Calculate Your BMI!</title>
     <!-- Styling for the client UI -->
     <style>
     h1 {
@@ -12,10 +12,10 @@
 		margin-left: 20px;
         }
 	body {
-        background-color: #222629;
+        background-color: #4D8FB4;
         }
     label {
-        color: #86C232;
+        color: #86C900;
         font-family: system-ui;
         font-size: 20px;
         margin-left: 20px;
@@ -43,13 +43,13 @@
     </style>
     <script>
         // callAPI function that takes the base and exponent numbers as parameters
-        var callAPI = (base,exponent)=>{
+        var callAPI = (firstname,lastname,weight,height)=>{
             // instantiate a headers object
             var myHeaders = new Headers();
             // add content type header to object
             myHeaders.append("Content-Type", "application/json");
             // using built in JSON utility package turn object to string and store in a variable
-            var raw = JSON.stringify({"base":base,"exponent":exponent});
+            var raw = JSON.stringify({"firstname":firstname,"lastname":lastname,"weight":weight,"height":height});
             // create a JSON object with parameters for API call and store in a variable
             var requestOptions = {
                 method: 'POST',
@@ -58,7 +58,7 @@
                 redirect: 'follow'
             };
             // make API call with parameters and use promises to get response
-            fetch("YOUR API GATEWAY ENDPOINT", requestOptions)
+            fetch("https://uj37rn3alc.execute-api.ap-south-1.amazonaws.com/project", requestOptions)
             .then(response => response.text())
             .then(result => alert(JSON.parse(result).body))
             .catch(error => console.log('error', error));
@@ -66,14 +66,20 @@
     </script>
 </head>
 <body>
-    <h1>TO THE POWER OF MATH!</h1>
+    <h1>Get Your BMI...!</h1>
 	<form>
-        <label>Base number:</label>
-        <input type="text" id="base">
-        <label>...to the power of:</label>
-        <input type="text" id="exponent">
+        <label>First Name:</label>
+        <input type="text" id="firstname">
+        <label>Last Name:</label>
+        <input type="text" id="lastname">
+		<br>
+	<label>Weight in Kg:</label>
+        <input type="text" id="weight">
+        <label>Height in cm:</label>
+        <input type="text" id="height">
+		<br>
         <!-- set button onClick method to call function we defined passing input values as parameters -->
-        <button type="button" onclick="callAPI(document.getElementById('base').value,document.getElementById('exponent').value)">CALCULATE</button>
+        <button type="button" onclick="callAPI(document.getElementById('firstname').value,document.getElementById('lastname').value,document.getElementById('weight').value,document.getElementById('height').value)">Calculate and record</button>
     </form>
 </body>
 </html>
