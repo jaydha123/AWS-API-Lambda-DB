@@ -22,13 +22,13 @@ def lambda_handler(event, context):
     weight=float(event['weight'])
     bmi=weight/height**2
 # write result and time to the DynamoDB table using the object we instantiated and save response in a variable
+#remember "First Name" and "Last Name" we have entered exactly same to partition key name and Sort key name in the DynamoDBtable.
     response = table.put_item(
         Item={
-            'First Name': event['name'],
-            'Last Name':event['surname'],
+            'First Name': event['firstname'],
+            'Last Name':event['lastname'],
             'BMI':str(bmi),
             'Recorded Time':now
-            
             })
 
 # return a properly formatted JSON object
