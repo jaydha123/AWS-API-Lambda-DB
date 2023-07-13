@@ -58,7 +58,7 @@
                 redirect: 'follow'
             };
             // make API call with parameters and use promises to get response
-            fetch("https://uj37rn3alc.execute-api.ap-south-1.amazonaws.com/project", requestOptions)
+            fetch("YOUR API ENDPOINT", requestOptions)
             .then(response => response.text())
             .then(result => alert(JSON.parse(result).body))
             .catch(error => console.log('error', error));
